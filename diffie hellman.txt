@@ -1,0 +1,90 @@
+import random
+
+# generate large prime number
+def generate_prime_number(length):
+    while True:
+        p = random.randrange(2*(length-1), 2*length)
+        if is_prime(p):
+            return p
+
+# check if number is prime
+def is_prime(n, k=5):
+    if n < 2: return False
+    for i in range(k):
+        a = random.randint(1, n-1)
+        if pow(a, n-1, n) != 1:
+            return False
+    return True
+
+# generate generator of prime field
+def generate_generator(p):
+    g = 2
+    while pow(g, (p-1)//2, p) == 1:
+        g += 1
+    return g
+
+# generate public key
+def generate_public_key(g, x, p):
+    return pow(g, x, p)
+
+# generate shared secret
+def generate_shared_secret(y, x, p):
+    return pow(y, x, p)
+
+
+    # Generate a large prime number
+# p = generate_prime_number(1024)
+p = 7
+print("\nPrime Number - P: ", p)
+
+    # Generate a generator of the prime field
+# g = generate_generator(p)
+g = 3
+print("\nGenerator- G: ", g)
+
+    # Alice chooses a secret key
+a = random.randint(2, p-2)
+print("\nAlice's Private Key - a: ", a)
+    # Bob chooses a secret key
+b = random.randint(2, p-2)
+print("\nBob's Private key - b: ", b)
+
+    # Alice generates her public key
+A = generate_public_key(g, a, p)
+print("\nPublic Key Generatrion x: ", A)
+
+    # Bob generates his public key
+B = generate_public_key(g, b, p)
+print("\nPublic Key Generatrion B: ", B)
+
+
+    # Alice and Bob exchange public keys'
+print(f"\n{'*' * 10}\nExchange of the Key")
+    # Alice generates the shared secret
+s1 = generate_shared_secret(B, a, p)
+print("Generation shared Secrete: s1", s1)
+    # Bob generates the shared secret
+s2 = generate_shared_secret(A, b, p)
+print("Generation shared Secrete: s2", s2)
+
+    # Ensure the shared secrets match
+if s1 == s2:
+    print("\nSucces")
+    print(f'\nShared secret: {s1}')
+else:
+    print("\nError and Stopped")
+
+
+
+    # q power everything mod p
+    # A public =>a* = qa mod p
+    #
+    # B public => b* = qb mod p
+
+    # Alice computes x using the following formula:
+    #
+    # x = (b*) mod p
+    #
+    # Bob computes x using the following formula:
+    #
+    # x = (a*) mod p

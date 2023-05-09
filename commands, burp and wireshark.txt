@@ -1,0 +1,111 @@
+ping --help
+#To show all help
+
+#ping command: IP level connectivity to another TCP/IP computer by sending internet COntrol Message Protocol echo request messages.
+
+ping -t 175.175.3.37
+#The "ping -t" command is a command used in command-line interfaces on various operating systems to continuously ping a target host until interrupted. The "ping" command is used to test the connectivity between two networked devices by sending ICMP packets to the target host and measuring the response time and any packet loss.
+
+The "-t" option in the ping command instructs it to continuously ping the target host until the command is interrupted with a Ctrl+C command. This can be useful for monitoring network connectivity over time, as it provides a continuous stream of information about the responsiveness of the target host. However, it should be used with caution to avoid causing excessive network traffic.
+
+ping -a IPADDRESS
+#The "ping -a" command is used to resolve the IP address of a host name by sending an ICMP echo request and attempting to retrieve the associated host name. It can be useful for verifying DNS resolution and identifying the host name associated with a particular IP address.
+
+
+ping -n 5 IPADD
+#The "-n" option followed by a number indicates the number of echo requests to be sent. For example, "ping -n 4" would send four echo requests to the target host. This option can be useful for testing network connectivity and measuring the responsiveness of the target host. It should be noted that this option may result in increased network traffic and should be used with caution.	
+
+
+ping -s 3 IPADDR
+#The "ping -s" command is used to specify the size of the ICMP echo request packet to be sent. The "-s" option, followed by a number, indicates the size of the packet in bytes. For example, "ping -s 64" would send an ICMP echo request packet of 64 bytes to the target host. This option can be useful for testing network connectivity and identifying potential packet fragmentation issues. It should be noted that the maximum size of the ICMP echo request packet that can be sent may vary depending on the network configuration, and some firewalls or routers may block ICMP packets of certain sizes.
+
+whois javapoint.com
+
+#displays about the website records.
+#The "whois" command is a utility that allows users to look up information about a domain name or IP address. Some domain registrars and web hosting companies may block the use of the "whois" command for security and privacy reasons. This is typically done to prevent unauthorized access to sensitive information, such as the name and contact details of the domain owner. 
+
+
+
+whois -v javatpoint.com
+
+#The "whois -v" command is used to perform a verbose whois lookup. This command provides more detailed information about a domain name or IP address, including the entire whois record retrieved from the database. The "-v" option can be useful for obtaining more detailed information about a domain name or IP address, such as the registrar's contact information, the domain creation and expiration dates, and the domain owner's contact details. 
+
+
+
+tracert google.com
+#The "tracert" command is used to trace the path that a packet takes from a source to a destination over an IP network. The command sends packets with increasing Time-To-Live (TTL) values to the destination host, and each router along the path decrements the TTL and sends an ICMP time-exceeded message back to the sender if the TTL reaches zero. By analyzing the ICMP messages returned by the routers, the "tracert" command can determine the IP addresses and round-trip times of each hop along the path. This information can be useful for troubleshooting network connectivity issues and identifying potential network bottlenecks. The "tracert" command is available on most operating systems, including Windows, macOS, and Linux.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#What is the use of Burp Suite? Burp Suite is an integrated platform/graphical tool for performing security testing of web applications. Its various tools work seamlessly together to support the entire testing process, from initial mapping and analysis of an application's attack surface, through to finding and exploiting security vulnerabilities.
+
+
+
+A brute force attack is a type of cyber attack where an attacker attempts to gain access to a target system or account by trying all possible combinations of passwords or other authentication credentials until the correct one is found.
+
+There are different types of brute force attacks, including:
+
+Simple brute force attack: In this type of attack, the attacker tries all possible combinations of characters in a random order until the correct password is found.
+
+Dictionary attack: In this type of attack, the attacker uses a list of commonly used passwords or dictionary words to try to guess the password.
+
+Hybrid attack: This type of attack combines a dictionary attack with variations of the words, such as adding numbers or special characters.
+
+Reverse brute force attack: In this type of attack, the attacker knows the target password policy, such as length, complexity, and character types. The attacker creates a list of passwords based on the policy and tries them against the target until the correct one is found.
+
+
+
+#STatus:
+The status column in the result section of a brute force attack in Burp Suite indicates the HTTP response status code received for each payload guess. Typically, when a wrong guess is made, the server responds with a status code of 401 or 403, indicating that the request was unauthorized or forbidden. However, when the correct password is guessed, the server may respond with a different status code, such as 200 OK, indicating that the request was successful. Therefore, by monitoring the status column during a brute force attack, the tester can determine which payload guesses were successful and which were not.
+
+#
+HTTP status code 200 means "OK" and is a standard response code indicating that the request has succeeded. This is the most common HTTP status code and indicates that the server has successfully processed the client's request and is returning the requested information or resource in the message body. In other words, the server has fulfilled the request, and there are no issues or errors that need to be reported back to the client. HTTP status code 200 is typically used for successful GET and POST requests, among others.
+
+
+
+
+
+#Wireshark
+
+
+
+The multiple rows of hexadecimals in Wireshark that you're referring to are called the "data" or "payload" of the packet. Each row represents 16 bytes of data, with the first byte starting at offset 0010, the second byte at offset 0020, and so on. The hexadecimal values in each row represent the actual data being transmitted over the network in that packet.
+
+This payload data is specific to the protocol being used, and can contain various types of information such as application data, metadata, headers, or other information related to the communication being analyzed. By examining the payload data, network analysts can gain insight into the actual content of the communication and potentially identify any security issues or anomalies.
+
+
+
+#Smurf attack, ping flood, and ping of death are all types of denial-of-service (DoS) attacks.
+
+In a smurf attack, the attacker sends a large number of Internet Control Message Protocol (ICMP) packets with a spoofed source IP address to a network's broadcast address, causing all the hosts in the network to respond to the spoofed address and flooding it with traffic.
+
+In a ping flood attack, the attacker sends a large number of ping requests (ICMP echo requests) to a target system, overwhelming it with traffic and causing it to slow down or crash.
+
+In a ping of death attack, the attacker sends an oversized ping packet to a target system, causing it to crash or become unstable. This type of attack exploits vulnerabilities in the target system's handling of oversized packets.
+
+
+Both Burp Suite and Wireshark are powerful tools used for network analysis and security testing, and they can be used to perform various types of attacks such as:
+
+Intercepting and modifying network traffic
+Brute force attacks on login pages and forms
+Session hijacking and cookie stealing
+Injection attacks such as SQL injection and XSS
+Denial of service attacks such as ping flood and smurf attack
+Man-in-the-middle attacks
+However, it's important to note that using these tools for any malicious purposes is illegal and unethical. These tools should only be used for legitimate security testing and research purposes.

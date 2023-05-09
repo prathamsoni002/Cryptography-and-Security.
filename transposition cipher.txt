@@ -1,0 +1,128 @@
+import numpy
+
+# Taking the inputs:
+
+plaintext = input("Enter the plain text: ")
+column_no = int(input("Enter the number of columns: "))
+plaintext = "".join(plaintext.split())  # Eliminate the blank spaces
+
+
+def plaintext_matrix(message):
+    # The function is to generate the matrix which will represent the Plain text:
+    matt = []
+    i = 0
+    while i < len(message):
+        if not i + column_no >= len(message):
+            # The above condition is to take the plain text elements of plaintext into matrix rows. If the cond is false means we need to add the None or Boggus element.
+            matt.append(list(message[i:i + column_no]))
+            i += column_no
+        else:
+            temp = list(message[i:])
+            for i in range(len(message[i:]), column_no):
+                temp.append(None)
+            matt.append(temp)
+            break
+    return matt
+
+
+mat = plaintext_matrix(plaintext)
+# Print the final matrix of original plaintext:
+print('\n'.join(['  '.join(map(str, row)) for row in mat]))
+
+print("\n", "-" * 50, "\n *****Keyless cipher*****")
+print("-" * 50, "\nEncryption: ")
+
+# Use the zip(*mat) method to read the columns of the matrix
+En = ""
+for i in zip(*mat):
+    if None not in i:
+        En += "".join(i)
+        # print(*i, sep='', end='')
+    else:
+        for k in i:
+            if k is not None:
+                En += k
+                # print(k, end="")
+            else:
+                pass
+print(En)  # The result of the encryption
+
+print("\nDecryption:")
+# mat = plaintext_matrix(En)
+Dn = ""
+for i in mat:
+    if None not in i:
+        Dn += "".join(i)
+    else:
+        for k in i:
+            if k is not None:
+                Dn += k
+            else:
+                pass
+
+print(Dn)  # the result of Decryption.
+
+#  --------------------------------------------------------------------
+#  --------------------------------------------------------------------
+
+print("\n\n*****With Key*****")
+# Take the key for encryption and decryption
+key = int(input("Enter the keys: "))
+# Create matrix for the plain text
+mat = plaintext_matrix(plaintext)
+print('\n'.join(['  '.join(map(str, row)) for row in mat]))
+# Transpose the matrix because the encryption key is for column wise cryptography
+res2 = numpy.transpose(mat)
+print("\nEncryption: ")
+encrypt_mat = []
+# Apply the real encryption process
+for i in str(key):
+    i = int(i)
+    encrypt_mat.append(list(res2[i - 1]))
+
+# print the encryption result:
+En = ""
+for i in encrypt_mat:
+    if None not in i:
+        En += "".join(i)
+    else:
+        for k in i:
+            if k is not None:
+                En += k
+            else:
+                pass
+# The Encryption matrix:
+print('\n'.join(['  '.join(map(str, row)) for row in numpy.transpose(encrypt_mat)]))
+print("\n", En)  # The result of the encryption
+
+
+print("\nDecryption:")
+
+
+# Apply the Decryption Algorithm
+
+decrypt_mat = [[0]]*column_no
+print(decrypt_mat)
+
+for i in enumerate((str(key))):
+    decrypt_mat[int(i[1]) - 1] = encrypt_mat[i[0]]
+
+
+# The Decryption Algo Resulted matrix:
+print('\n'.join(['  '.join(map(str, row)) for row in numpy.transpose(decrypt_mat)]))
+
+Dn = ""
+for i in zip(*decrypt_mat):
+    # Zip method is for reading 2D array columnwise.
+    if None not in i:
+        Dn += "".join(i)
+    else:
+        for k in i:
+            if k is not None:
+
+                Dn += k
+            else:
+                pass
+
+print("\n", Dn)
+# Result of the Decryption Algorithm

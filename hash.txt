@@ -1,0 +1,52 @@
+# Define the input and split it into 8-bit chunks
+input = 0b10111001101010100010110010101001
+w = []
+temp = bin(input)
+for i in range(0, len(temp), 8):
+    w.append(int(temp[i: i + 8], 2))
+
+# Define the initial values of a and b
+a, b = 0b10110101, 0b11001101011
+
+# Define the logic operations and update a and b for each chunk of w
+f = [(a & b) ^ (a | b), (a ^ a) & (b ^ b), a ^ b, ~a ^ ~b]
+
+for i in range(4):
+    a, b = f[i], (w[i] + a) % 256
+
+a, b = format(a & 0xFF, "08b") , format(b & 0xFF, "08b")
+print(a, b)
+
+
+def Tree_hash(MSB, LSB):
+    i = 0
+    j = 1
+    Root = MSB[0]
+    child = []
+    eve = True
+    while j < len(LSB) and i < len(MSB) - 1:
+        if eve:
+            tp = (LSB[j], str(int(LSB[j]) ^ int(MSB[i + 1])))
+            child.append(tp)
+            i += 2
+            eve = False
+        else:
+            tp = (MSB[i], str(int(LSB[j + 1]) ^ int(MSB[i])))
+            child.append(tp)
+            j += 2
+            eve = True
+
+    MSB = ''
+    LSB = ''
+    for i in reversed(child):
+        MSB += str(int(i[0]) ^ int(i[1]))
+        LSB += i[1]
+
+    MSB += Root
+    LSB += Root
+
+    return MSB, LSB
+
+print(Tree_hash(a, b))
+
+
